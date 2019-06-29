@@ -2,8 +2,15 @@
 
 const { load_config } = require('./helpers.js');
 
-const CONFIG = load_config('config.json');
+const { CONFIG, ERROR_MESSAGE_INVALID_INPUT, ERROR_MESSAGE_MAXIMUM_GUESTS_REACHED, ERROR_MESSAGE_MAXIMUM_ROOMS_REACHED, ERROR_MESSAGE_MORE_ADULTS_REQUIRED } = require('./constants.js');
 
+/**
+ * This function is used internally to validate book_minimum_rooms's inputs
+ * it makes sure that all input params are integer and not greater than maximum allowed guests per booking
+ * @param {integer} adults - number of adults for this booking
+ * @param {integer} children - number of children for this booking
+ * @param {integer} infants - number of infants for this booking
+ */
 function _validate_input(adults, children, infants)
 {
     if(
@@ -15,7 +22,7 @@ function _validate_input(adults, children, infants)
         infants !== parseInt(infants, 10)
     )
     {
-        throw new Error('Invalid input, All input parameters should be integers');
+        throw new Error(ERROR_MESSAGE_INVALID_INPUT);
     }
 
     
@@ -24,10 +31,27 @@ function _validate_input(adults, children, infants)
         total_guests = adults + children;
 
     if(total_guests > CONFIG.maximumGuestsPerBooking)
-        throw new Error('Booking rejected, Our hotel regulations don\'t allow more than ' + CONFIG.maximumGuestsPerRoom + ' guests in a single booking');
+        throw new Error(ERROR_MESSAGE_MAXIMUM_GUESTS_REACHED);
 }
 
+/**
+ * This function is the core function of this app, it implements my algorithm to solve the problem
+ * as the following:
 
+    1. if we have children or infats let's open a room and put as much as we can inside,
+       we need to make sure that we have one adult also.
+       if there is no more adults then we can hanlde this booking (it is our hotels regulations)
+    
+    2.  after finishing all infants and children we check if we still have any adults
+        if yes we try to fit them on the rooms that we booked already (CRITICAL TO GET MIN NO OF ROOMS)
+        if we could, then we are good enough to return the result
+        if not, we may keep booking new rooms until every adult has his room
+        UNLESS we reach our maximum no of rooms per booking
+ 
+ * @param {integer} adults - number of adults for this booking
+ * @param {integer} children - number of children for this booking
+ * @param {integer} infants - number of infants for this booking
+ */
 function book_minimum_rooms(adults, children, infants)
 {   
     // 1st of all, let's validate input
@@ -44,14 +68,14 @@ function book_minimum_rooms(adults, children, infants)
             // if there is no more adults then we can hanlde this booking (it is our hotels regulations)
             if(adults <= 0)
             {
-                throw new Error('Booking rejected, Our hotel regulations requires at least one adult to be in each room that has children or infant');
+                throw new Error(ERROR_MESSAGE_MORE_ADULTS_REQUIRED);
             }
 
             // Opening new room to host rest of children & infants
             // if we still can do
             if(rooms.length >= CONFIG.maximumRoomsPerBooking)
             {
-                throw new Error('Booking rejected, Our hotel regulations don\'t allow more than ' + CONFIG.maximumRoomsPerBooking + ' rooms in a single booking');
+                throw new Error(ERROR_MESSAGE_MAXIMUM_ROOMS_REACHED);
             }
 
             let room = {
@@ -118,7 +142,7 @@ function book_minimum_rooms(adults, children, infants)
                 // Can we open new room?
                 if(rooms.length >= CONFIG.maximumRoomsPerBooking)
                 {
-                    throw new Error('Booking rejected, Our hotel regulations don\'t allow more than ' + CONFIG.maximumRoomsPerBooking + ' rooms in a single booking');
+                    throw new Error(ERROR_MESSAGE_MAXIMUM_ROOMS_REACHED);
                 }
                 let room = {
                     adults: 0,
