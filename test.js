@@ -1,9 +1,10 @@
 const assert = require('assert');
 
 const { load_config } = require('./helpers.js');
+const { book_minimum_rooms } = require('./app.js');
 
 describe('Helper Functions', function() {
-    describe('load_config(file_path)', function() {
+    describe('load_config()', function() {
         it('should return json object if called with correct file name located on the same folder', function() {
             assert.equal(typeof(load_config('config.json')), 'object');
         });
@@ -27,10 +28,16 @@ describe('Helper Functions', function() {
 
 
 describe('Booking function', function() {
-    describe('book_minimum_rooms(adult, children, infants)', function() {
+    describe('book_minimum_rooms()', function() {
         it('should throw an Error if one or more param is not a number', function() {
+            assert.throws(()=>book_minimum_rooms(1, 2, 'string'), Error);
+            assert.throws(()=>book_minimum_rooms(1, 'string', 2), Error);
+            assert.throws(()=>book_minimum_rooms('string', 1, 2), Error);
+            assert.throws(()=>book_minimum_rooms(1.2, 1, 2), Error);
+            assert.throws(()=>book_minimum_rooms(1, 1.2, 2), Error);
+            assert.throws(()=>book_minimum_rooms(1, 2, 1.2), Error);
         });
-        it('should throw an Error if total of adults and children is grater than maximum allowed', function() {
+        it('should throw an Error if total of adults and children is grater than allowed', function() {
         });
         it('should return a list of rooms if called correctly (I am thinking of list here so we can tell not only how many rooms we need(rooms.length), but also we can tell in details how many adults, children and infants are on each room)', function() {
         });
