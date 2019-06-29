@@ -38,6 +38,7 @@ describe('Booking function', function() {
             assert.throws(()=>book_minimum_rooms(1, 2, 1.2), Error);
         });
         it('should throw an Error if total of adults and children is grater than allowed', function() {
+            assert.throws(()=>book_minimum_rooms(12, 12, 1), Error);
         });
         it('should return a list of rooms if called correctly (I am thinking of list here so we can tell not only how many rooms we need(rooms.length), but also we can tell in details how many adults, children and infants are on each room)', function() {
         });

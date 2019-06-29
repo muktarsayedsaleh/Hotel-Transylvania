@@ -17,6 +17,14 @@ function _validate_input(adults, children, infants)
     {
         throw new Error('Invalid input, All input parameters should be integers');
     }
+
+    
+    let total_guests = adults + children + infants;
+    if(CONFIG.maximumGuestsPerBookingExcludingInfants)
+        total_guests = adults + children;
+
+    if(total_guests > CONFIG.maximumGuestsPerBooking)
+        throw new Error('Booking rejected, Our hotel regulations don\'t allow more than ' + CONFIG.maximumGuestsPerRoom + ' guests in a single booking');
 }
 
 
@@ -24,6 +32,8 @@ function book_minimum_rooms(adults, children, infants)
 {   
     // 1st of all, let's validate input
     _validate_input(adults, children, infants);
+
+    // if valid let's start our algorithm
     let rooms = [];
     return rooms;
 }
