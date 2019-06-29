@@ -41,6 +41,12 @@ function book_minimum_rooms(adults, children, infants)
         // we need to make sure that we have one adult also
         // if there is no more adults then we can hanlde this booking (it is our hotels regulations)
 
+
+        // after finishing all infants and children we check if we still have any adults
+        // if yes we try to fit them on the rooms that we booked already (CRITICAL TO GET MIN NO OF ROOMS)
+        // if we could, then we are good enough to return the result
+        // if not, we may keep booking new rooms until every adult has his room
+        // UNLESS we reach our maximum no of rooms per booking
     }
     return rooms;
 }
