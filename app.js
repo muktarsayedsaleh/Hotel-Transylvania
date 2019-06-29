@@ -37,7 +37,8 @@ function _validate_input(adults, children, infants)
 /**
  * This function is the core function of this app, it implements my algorithm to solve the problem
  * as the following:
-
+    
+    While we have more guests let's do the following:
     1. if we have children or infats let's open a room and put as much as we can inside,
        we need to make sure that we have one adult also.
        if there is no more adults then we can hanlde this booking (it is our hotels regulations)
