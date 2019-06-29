@@ -18,7 +18,7 @@ please make sure that you  have **[Node.js](https://nodejs.org/en/)** and **[npm
    While we have more guests let's do the following:
     a. if we have children or infats let's open a room and put as much as we can inside,
        we need to make sure that we have one adult also.
-       if there is no more adults then we can hanlde this booking (it is our hotels regulations)
+       if there is no more adults then we can't hanlde this booking (it is our hotels regulations)
   
     b.  after finishing all infants and children we check if we still have any adults
         if yes we try to fit them on the rooms that we booked already (CRITICAL TO GET MIN NO OF ROOMS)
