@@ -35,6 +35,13 @@ function book_minimum_rooms(adults, children, infants)
 
     // if valid let's start our algorithm
     let rooms = [];
+    while(adults > 0 || children > 0 || infants > 0)
+    {
+        // if we have children or infats let's open a room and put as much as we can inside
+        // we need to make sure that we have one adult also
+        // if there is no more adults then we can hanlde this booking (it is our hotels regulations)
+
+    }
     return rooms;
 }
 
