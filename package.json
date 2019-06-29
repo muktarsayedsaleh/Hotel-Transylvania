@@ -1,0 +1,14 @@
+{
+  "name": "hotel-transylvania",
+  "version": "1.0.0",
+  "description": "Muktar Sayed Saleh's solution of Hotel Transylvania problem",
+  "main": "app.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "author": "Muktar Sayed Saleh",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}
