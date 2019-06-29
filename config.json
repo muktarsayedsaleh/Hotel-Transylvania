@@ -1,0 +1,10 @@
+{
+    "maximumGuestsPerBooking": 7,
+    "maximumGuestsPerBookingExcludingInfants": true,
+    "maximumRoomsPerBooking": 3,
+    "maximumGuestsPerRoom": {
+        "adults": 3,
+        "children": 3,
+        "infants": 3
+    }
+}
