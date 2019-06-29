@@ -41,8 +41,10 @@ describe('Booking function', function() {
             assert.throws(()=>book_minimum_rooms(12, 12, 1), Error);
         });
         it('should return a list of rooms if called correctly (I am thinking of list here so we can tell not only how many rooms we need(rooms.length), but also we can tell in details how many adults, children and infants are on each room)', function() {
+            assert.equal(typeof(book_minimum_rooms(6, 1, 2)), 'object');
         });
         it('should return 2 (a list two rooms) as a result for the given example in the question: For 3 Adults, 4 Children and 2 infants can be fit in 2 rooms and not 3.', function() {
+            assert.equal(book_minimum_rooms(3, 4, 2).length, 2);
         });
     });
 });
